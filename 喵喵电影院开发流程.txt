@@ -1,0 +1,19 @@
+1.搭建好脚手架和配置好远程仓库
+2.创建一个分支，小组成员在子分支开发
+  src文件下的assets是放一些静态资源的，assets里面的图片会编码成base64的，建议里面放一些小图标，public里面放一些比较大的图片
+  views里面放的是页面级别的组件，复用性小，components里面放一些公共的组件
+
+  为了可扩展，建议创建文件夹，在views里面写好页面，相应的router里面配置好路由
+3.头部组件和导航组件：
+	在components下创建公共文件夹Header和TabBar，里面有相应的index.vue，
+ 	组件写好后，在views文件夹下引入组件，利用局部组件components注入
+    
+    	在components文件夹下的Header头部动态获取标题：  
+		在header文件下的index.vue文件下的<script>标签下的export default中写入子组件访问父组件的接口props,
+		然后在views中父组件引入该头部组件的标签上添加title属性
+4.电影路由与组件拆分：
+	在components文件夹下创建City、NowPlaying、ComingSoon、Search文件夹，里面有相应的index.vue
+	在主路由中写一个重定向，当路径不匹配时回到movie路由，然后在movie路由中引入二级路由，把City、NowPlaying、ComingSoon、Search都引入进去
+	在views中的Movie文件夹下的index.vue中添加导航
+5.影院组件与登录组件：
+	构造影院组件及样式,然后在views中的Cinema组件中引入该子组件
