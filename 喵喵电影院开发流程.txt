@@ -16,4 +16,11 @@
 	在主路由中写一个重定向，当路径不匹配时回到movie路由，然后在movie路由中引入二级路由，把City、NowPlaying、ComingSoon、Search都引入进去
 	在views中的Movie文件夹下的index.vue中添加导航
 5.影院组件与登录组件：
-	构造影院组件及样式,然后在views中的Cinema组件中引入该子组件
+	构造影院组件及样式,然后在views中的Cinema组件中引入该子组件，上传到github中
+6.城市组件数据渲染：
+	git checkout -b setData 创建一个分支
+	在项目根目录下创建vue.config.js文件，这是vue脚手架的配置环境，设置反向代理
+	导入接口的数据，利用mint-ui设计滚轮
+7.热映电影组件数据渲染：
+	
+	
