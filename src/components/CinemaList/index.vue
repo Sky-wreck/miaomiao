@@ -1,21 +1,24 @@
 <template>
     <div class="cinema_body">
-        <ul>
-            <li v-for="data in cinemaList" :key="data.cinemaId">
-                <div>
-                    <span>{{data.name}}</span>
-                    <span class="q"><span class="price">{{data.lowPrice/100}}</span> 元起</span>
-                </div>
-                <div class="address">
-                    <span>{{data.address}}</span>
-                    <span>{{data.distance}}</span>
-                </div>
-                <div class="card">
-                    <div>小吃</div>
-                    <div>折扣卡</div>
-                </div>
-            </li>
-        </ul>
+        <Loading v-if="isLoading" />
+        <Srcoller v-else>
+            <ul>
+                <li v-for="data in cinemaList" :key="data.cinemaId">
+                    <div>
+                        <span>{{data.name}}</span>
+                        <span class="q"><span class="price">{{data.lowPrice/100}}</span> 元起</span>
+                    </div>
+                    <div class="address">
+                        <span>{{data.address}}</span>
+                        <span>{{data.distance}}</span>
+                    </div>
+                    <div class="card">
+                        <div>小吃</div>
+                        <div>折扣卡</div>
+                    </div>
+                </li>
+            </ul>
+        </Srcoller>
     </div>
 </template>
 
@@ -28,19 +31,29 @@ export default {
     name : 'CinemaList',
     data(){
         return {
-            cinemaList : []
+            cinemaList : [],
+            isLoading : true,
+            prevCity : -1
         }
     },
-    mounted(){
+    activated(){
+        var cityID = this.$store.state.city.cityId
+
+        if(this.prevCityId === cityID){  //这样可以保证（除城市页面）从其他页面跳转过来有缓存，从城市页面跳转重新加载
+            return;
+        }
+        this.isLoading = true
+
         axios({
-             url : 'https://m.maizuo.com/gateway?cityId=110100&ticketFlag=1&k=8176731',
+             url : 'https://m.maizuo.com/gateway?cityId='+cityID+'&ticketFlag=1&k=8176731',
              headers : {
                 'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.0.4","e":"1596848294105531641430017","bc":"110100"}',
                 'X-Host': 'mall.film-ticket.cinema.list'
             }
         }).then(res =>{
-            console.log(res.data)
+            //console.log(res.data)
             this.cinemaList = res.data.data.cinemas
+            this.isLoading = false
         })
     }
 }
