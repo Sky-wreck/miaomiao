@@ -21,6 +21,45 @@
 	git checkout -b setData 创建一个分支
 	在项目根目录下创建vue.config.js文件，这是vue脚手架的配置环境，设置反向代理
 	导入接口的数据，利用mint-ui设计滚轮
-7.热映电影组件数据渲染：
+7.各种数据渲染：
+	各种数据渲染完毕后，打开git bash
+	git status查看修改内容
+	git add . 提交内容
+	git commit -m "add setData" 添加注释
+	git checkout dev 切换开发分支
+	git merge setData --no-ff
+	git push origin dev  添加到远程仓库
+ 	git banch 查看分支
+	git branch -d setData 删除setData分支
+8.封装better-scroll组件：
+	打开git bash
+	git checkout -b getCity 创建一个分支
+	在根目录cnpm i -s better-scroll安装滑屏插件
+	首先在NowPlaying引入，在数据赋值的时候调用此组件可能页面还没有渲染，故 使用this.$nextTick //此方法可以保证数据渲染完毕之后在触发回调函数
+	在图片添加点击事件@tap
+9.封装loading组件：    当还没加载完数据的时候显示一个正在加载动画效果
+10.当前城市本地存储和状态管理：	
+	在mounted生命周期中，window.localStorage.setItem('cityList', dataList)进行数据本地存储，数组是不能直接存储的，得转换成字符串类型
 	
-	
+	在stroe文件夹下的index.js中使用vuex进行状态管理，在store文件夹下创建city文件夹，在comonents文件夹下的City添加点击按钮@click，但是得在click.native才可以使用，
+	修改状态管理，保存城市名字和Id到localstorage,  然后修改初始状态管理中的状态得到此状态，跳转到正在热映页面
+11.修改当前城市ID关联数据：
+	mounted生命周期在keep-alive缓存后不会再次触发，但是activated生命周期可以
+	获取状态管理中的cityId,对url中的id进行赋值
+12.定位城市与弹窗：
+	在components下创建JS文件夹，里面在创一个MessageBox文件夹，里面的vue组件写好样式
+
+	为了js和vue结合，在js文件里写出对外接口，配置参数，然后渲染vue文件里的参数
+
+
+
+
+
+
+
+
+
+
+
+
+

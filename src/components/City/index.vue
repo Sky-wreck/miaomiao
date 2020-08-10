@@ -1,9 +1,12 @@
 <template>
     <mt-index-list>
-        <mt-index-section :index="data.index" v-for="data in datalist" :key="data.index">
-            <mt-cell :title="city.name" v-for="city in data.list" :key="city.cityId"></mt-cell>
-        </mt-index-section>
+        <Loading v-if="isLoading"/>
+        <mt-index-section v-else :index="data.index" v-for="data in datalist" :key="data.index" >
+            <mt-cell :title="city.name" v-for="city in data.list" :key="city.cityId" @click.native="handleToCity(city.name , city.cityId)">
+            </mt-cell>
+        </mt-index-section> 
     </mt-index-list>
+        
 </template>
 
 <script>
@@ -13,21 +16,32 @@ export default {
 
     data(){
         return {
-            datalist : []
+            datalist : [],
+            isLoading : true
         }
     },
     name : 'City',
     mounted(){
-        axios({
-            url:"https://m.maizuo.com/gateway?k=9206772",
-            headers : {
-                'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.0.4","e":"1596848294105531641430017","bc":"310100"}',
-                'X-Host': 'mall.film-ticket.city.list'
-            }
-        }).then(res =>{
-            //console.log(res.data)
-            this.datalist = this.handleCity(res.data.data.cities)
-        })
+        var citylist = window.localStorage.getItem('citylist')
+
+        if(citylist){
+            this.datalist = JSON.parse(citylist)
+            this.isLoading = false
+        }else{
+            axios({
+                url:"https://m.maizuo.com/gateway?k=9206772",
+                headers : {
+                    'X-Client-Info': '{"a":"3000","ch":"1002","v":"5.0.4","e":"1596848294105531641430017","bc":"310100"}',
+                    'X-Host': 'mall.film-ticket.city.list'
+                }
+            }).then(res =>{
+                this.datalist = this.handleCity(res.data.data.cities)
+                this.isLoading = false
+                //数据进行本地存储,数组是不能直接存储的，得转换成字符串类型
+                window.localStorage.setItem('citylist',JSON.stringify(this.datalist));             
+            })
+        }
+        
     },
 
     methods:{
@@ -53,6 +67,13 @@ export default {
             }
             return newlist
 
+        },
+        handleToCity(name , cityId){
+            //修改状态管理
+            this.$store.commit('city/CITY_INFO',{name,cityId})
+            window.localStorage.setItem('nowName',name)
+            window.localStorage.setItem('nowId',cityId)
+            this.$router.push('/movie/nowPling')
         }
     }
 }

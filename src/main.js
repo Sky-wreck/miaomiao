@@ -10,6 +10,12 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 Vue.use(MintUI)
 
+import Srcoller from '@/components/Srcoller'
+Vue.component('Srcoller' , Srcoller);
+
+import Loading from '@/components/Loading'
+Vue.component('Loading',Loading);
+
 Vue.config.productionTip = false
 
 new Vue({
