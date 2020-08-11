@@ -4,9 +4,9 @@
         <Srcoller v-else>
             <ul>
                 <li v-for="data in movieList" :key="data.filmId">
-                    <div class="pic_show"><img :src="data.poster"></div>
+                    <div class="pic_show" @tap="handleToDetail(data.filmId)"><img :src="data.poster"></div>
                     <div class="info_list">
-                        <h2>{{data.name}}</h2>
+                        <h2 @tap="handleToDetail(data.filmId)">{{data.name}}</h2>
                         <p v-if="data.grade">观众评分: <span class="grade">{{data.grade}}</span></p>
                         <p v-else><span><br/></span></p>
                         <p>主演: {{data.actors | actorfilter}}</p>
@@ -66,6 +66,11 @@ export default {
             this.movieList = res.data.data.films
             this.isLoading = false
         })
+    },
+    methods : {
+        handleToDetail(filmId){
+            this.$router.push('/movie/detail/2/'+ filmId);
+        }
     }
 }
 </script>

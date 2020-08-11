@@ -1,6 +1,6 @@
 const state = {
-    name : window.localStorage.getItem('nowName') ,
-    cityId : window.localStorage.getItem('nowId')
+    name : window.localStorage.getItem('nowName') || '北京',
+    cityId : window.localStorage.getItem('nowId') || 110110
 };
 
 const action = {

@@ -51,6 +51,18 @@
 
 	为了js和vue结合，在js文件里写出对外接口，配置参数，然后渲染vue文件里的参数
 
+	git status查看修改内容
+	git add . 提交内容
+	git commit -m "add getCity" 添加注释
+	git checkout dev 切换开发分支
+	git merge getCity --no-ff
+	git push origin dev  添加到远程仓库
+ 	git banch 查看分支
+	git branch -d setData 删除setData分支
+13.电影详情页组件开发：
+	打开gitbash,git checkout -b detailPage创建分支
+
+	在views文件的Movie文件夹下创建detail.vue ,然后配置好动态路由
 
 
 

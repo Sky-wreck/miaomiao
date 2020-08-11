@@ -5,12 +5,12 @@
             <ul>
                 <li class="pullDown">{{pullDownmsg}}</li>
                 <li v-for="data in movieList" :key="data.filmId">
-                    <div class="pic_show" @tap="handleToDetail"><img :src="data.poster"></div>
+                    <div class="pic_show" @tap="handleToDetail(data.filmId)"><img :src="data.poster"></div>
                     <div class="info_list">
-                        <h2>{{data.name}}</h2>
+                        <h2 @tap="handleToDetail(data.filmId)">{{data.name}}</h2>
                         <p v-if="data.grade">观众评分: <span class="grade">{{data.grade}}</span></p>
                         <p v-else><span><br/></span></p>
-                        <p>主演: {{data.actors | actorfilter}}</p>
+                        <p v-if="data.actors">主演: {{data.actors | actorfilter}}</p>
                         <p>{{data.nation}}&nbsp;|&nbsp;{{data.runtime+'分钟'}}</p>
                     </div>
                     <div class="btn_mall">
@@ -88,8 +88,9 @@ export default {
         })
     },
     methods:{
-        handleToDetail(){
-            console.log("handleToDetail")
+        handleToDetail(filmId){
+            //console.log(filmId)
+            this.$router.push('/movie/detail/1/'+ filmId)
         },
         handleToScroll(pos){
              if(pos.y > 30){   //pos参数可以检测当前位置
