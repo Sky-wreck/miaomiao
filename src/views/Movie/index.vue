@@ -19,6 +19,7 @@
             </keep-alive>
         </dir>
         <TabBar />
+        <router-view name="detail" /> <!-- 添加新路由 -->
     </div>
 </template>
 
@@ -43,8 +44,8 @@ export default {
     } */
     mounted(){
         setTimeout(()=>{
-            var nm = '北京';
-            var id = '110110';
+            var nm = "北京";
+            var id = 110100;
             if( this.$store.state.city.cityId == id){return;}
             messageBox({
                 title : '定位',
@@ -52,8 +53,8 @@ export default {
                 cancel : '取消',
                 ok : '切换定位',
                 handleOk(){
-                    window.localStorage.setItem('nowName',nm)
-                    window.localStorage.setItem('nowId',id)
+                    window.localStorage.setItem('nowName',nm);
+                    window.localStorage.setItem('nowId',id);
                     window.location.reload()
                 }
             })

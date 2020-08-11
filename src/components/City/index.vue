@@ -73,7 +73,7 @@ export default {
             this.$store.commit('city/CITY_INFO',{name,cityId})
             window.localStorage.setItem('nowName',name)
             window.localStorage.setItem('nowId',cityId)
-            this.$router.push('/movie/nowPling')
+            this.$router.push('/movie')
         }
     }
 }
