@@ -14,10 +14,18 @@ module.exports = {
               target: 'http://m.maoyan.com',
               // ws: true,
               changeOrigin: true
-            }
-            // '/foo': {
-            //   target: '<other_url>'
-            // }
+            },
+            /* '/api2' : {
+              target : 'http://localhost:3000',
+              changeOrigin : true
+            },
+            '/api' : {
+                target : 'http://192.168.56.1',
+                changeOrigin : true
+            } */
+              // '/foo': {
+              //   target: '<other_url>'
+              // }
           }
         
     }
